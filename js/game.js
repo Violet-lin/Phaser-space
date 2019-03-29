@@ -26,6 +26,9 @@ gameScene.create = function() {
   let imageBaseWidth = 1920;
   let imageBaseHeight = 1080;
   let heightRatio = topBackgroundHeight / imageBaseHeight;
+  let offsetX = -45;
+  let offsetY = 0;
+
 
   this.add.sprite(0, 0, 'background');
   this.background1 = this.add.tileSprite(topBackgroundXOrigin, topBackgroundYOrigin, imageBaseWidth, imageBaseHeight, 'background');
@@ -40,6 +43,7 @@ gameScene.create = function() {
       start: 0.5,
       end: 0
     },
+    accelerationX: -400,
     blendMode: 'ADD'
   });
 
@@ -47,7 +51,8 @@ gameScene.create = function() {
   this.player = this.physics.add.sprite(200, this.sys.game.config.height / 2, 'player');
   this.player.setScale(0.8);
 
-  emitter.startFollow(this.player);
+  // emitter.startFollow(this.player);
+  emitter.startFollow(this.player, offsetX, offsetY, true);
   this.star_field1 = this.add.tileSprite(topBackgroundXOrigin, topBackgroundYOrigin, imageBaseWidth, imageBaseHeight, 'star_field');
   this.star_field1.setScale(1.2);
   this.star_field2 = this.add.tileSprite(topBackgroundXOrigin, topBackgroundYOrigin, imageBaseWidth, imageBaseHeight, 'star_field');
@@ -91,7 +96,8 @@ gameScene.update = function() {
   } else {
     this.player.setVelocityY(0);
   }
-
+  // game.off('hidden', game.onHidden, game);
+  // game.off('visible', game.onVisible, game);
 };
 
 gameScene.render = function() {
